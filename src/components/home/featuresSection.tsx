@@ -22,14 +22,14 @@ function FeaturesSection() {
             } className='w-max px-5'>Identificación de patrones</Chip>
           </div>
 
-          <div className='pt-0 md:pt-4'>
+          <div className='pt-0 md:pt-2'>
             <Chip startContent={
               <FaUserDoctor size={20} className='text-success' />
             } endContent={
               <FaUserDoctor size={20} className='text-success' />
             } className='w-max px-5'>Alertas a profesionales de salud</Chip>
           </div>
-          <div className='pt-0 md:pt-4'>
+          <div className='pt-0 md:pt-2'>
             <Chip startContent={
               <FaBookMedical size={20} className='text-success' />
             } endContent={
