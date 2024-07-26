@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
+import { NextUIProvider } from "@nextui-org/react";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap"
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,9 +19,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const className = "dark"
   return (
     <html lang="es">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} dark text-foreground bg-background w-full h-full`}>
+        <NextUIProvider locale="es" className={className}>
+          {children}
+        </NextUIProvider>
+      </body>
     </html>
   );
 }
