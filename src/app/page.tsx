@@ -1,9 +1,10 @@
+import BenefitsSection from "@/components/home/benefitsSection";
 import FeaturesSection from "@/components/home/featuresSection";
 import MainSection from "@/components/home/mainSection";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center">
+    <main className="flex flex-col items-center justify-center">
       <header>
         <nav>
           NAVBAR
@@ -14,9 +15,7 @@ export default function Home() {
 
       <FeaturesSection />
 
-      <section>
-        <h2>Beneficios</h2>
-      </section>
+      <BenefitsSection />
 
       <section>
         <h2>¿Como funciona?</h2>

@@ -22,10 +22,8 @@ export default function RootLayout({
   const className = "dark"
   return (
     <html lang="es">
-      <body className={`${inter.className} dark text-foreground bg-background w-full h-full`}>
-        <NextUIProvider locale="es" className={className}>
-          {children}
-        </NextUIProvider>
+      <body className={`${inter.className} min-h-screen min-w-screen flex flex-col items-center justify-center`}>
+        <NextUIProvider className={className}>{children}</NextUIProvider>
       </body>
     </html>
   );
