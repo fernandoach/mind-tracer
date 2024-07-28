@@ -22,7 +22,7 @@ export default function RootLayout({
   const className = "dark"
   return (
     <html lang="es">
-      <body className={`${inter.className} min-h-screen min-w-screen flex flex-col items-center justify-center`}>
+      <body className={`${inter.className} min-h-screen min-w-screen flex flex-col items-center justify-center overflow-x-hidden`}>
         <NextUIProvider className={className}>{children}</NextUIProvider>
       </body>
     </html>

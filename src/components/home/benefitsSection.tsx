@@ -4,7 +4,7 @@ import { FaHeartCirclePlus, FaCheck } from 'react-icons/fa6'
 
 function BenefitsSection() {
     return (
-        <section className="w-8/12 py-10">
+        <section className="w-8/12 py-10" id='beneficios'>
             <div className={`flex flex-col items-center justify-center text-center`}>
                 <FaHeartCirclePlus size={50} className='text-success' />
                 <h2 className='text-success text-xl p-3'>Beneficios</h2>

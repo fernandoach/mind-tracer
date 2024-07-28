@@ -1,15 +1,16 @@
 import BenefitsSection from "@/components/home/benefitsSection";
+import CallToActionSection from "@/components/home/callToActionSection";
 import FeaturesSection from "@/components/home/featuresSection";
+import Footer from "@/components/home/footer";
+import HowWorkSection from "@/components/home/howWorkSection";
 import MainSection from "@/components/home/mainSection";
+import NavBar from "@/components/navbar/navbar";
+import { Divider } from "@nextui-org/react";
 
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center">
-      <header>
-        <nav>
-          NAVBAR
-        </nav>
-      </header>
+      <NavBar />
 
       <MainSection />
 
@@ -17,26 +18,12 @@ export default function Home() {
 
       <BenefitsSection />
 
-      <section>
-        <h2>¿Como funciona?</h2>
-      </section>
+      <HowWorkSection />
 
-      <section>
-        <h2>Llamado a la acción</h2>
-      </section>
+      <CallToActionSection />
 
-      <section>
-        <h2>Preguntas frecuentes</h2>
-      </section>
-
-      <section>
-        <h2>Accesibilidad y usabilidad</h2>
-      </section>
-
-      <footer>
-        <p>© 2024 Mind Tracer</p>
-      </footer>
-
+      <Divider />
+      <Footer />
     </main>
   );
 }

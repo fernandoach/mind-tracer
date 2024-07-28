@@ -4,7 +4,7 @@ import { FaBuffer, FaKitMedical, FaUserDoctor, FaBookMedical } from "react-icons
 
 function FeaturesSection() {
   return (
-    <section className='w-8/12 py-10'>
+    <section className='w-8/12 py-10' id='caracteristicas'>
       <div className='flex flex-col items-center justify-center text-center'>
         <FaBuffer size={50} className='text-success' />
         <h2 className='text-success text-xl p-3'>Caracteristicas</h2>
