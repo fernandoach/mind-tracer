@@ -10,8 +10,6 @@ import { Divider } from "@nextui-org/react";
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center">
-      <NavBar />
-
       <MainSection />
 
       <FeaturesSection />
@@ -22,8 +20,6 @@ export default function Home() {
 
       <CallToActionSection />
 
-      <Divider />
-      <Footer />
     </main>
   );
 }
