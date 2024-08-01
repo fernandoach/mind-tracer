@@ -13,7 +13,9 @@ export async function POST(request: NextRequest){
             return NextResponse.json({message: "Passwords do not match"})
         }
 
-        await connection
+        console.log(body)
+
+        await connection()
 
         const newUser = new userModel({
             fullName, gender, age, grade, email, password
@@ -21,7 +23,7 @@ export async function POST(request: NextRequest){
 
         await newUser.save()
 
-        await disconnect
+        await disconnect()
 
         return NextResponse.json({message: "User registered successfully"})
 

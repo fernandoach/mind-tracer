@@ -5,17 +5,20 @@ const {mongoServer, mongoDbName} = process.env;
 const mongoURI = `${mongoServer}/${mongoDbName}`;
 console.log(mongoURI)
 
-const connection = mongoose.connect(mongoURI).then( mongoose => {
-    console.log("Mongoose connected")
-    return mongoose
-}).catch(err => {
-    console.log(err)
-})
+const connection = async () => {
+    try {
+        await mongoose.connect(mongoURI)
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-const disconnect = mongoose.connection.close().then(() => {
-    console.log('Mongoose disconnected')
-}).catch(err => {
-    console.log(err)
-}); 
+const disconnect = async () => {
+    try {
+        mongoose.connection.close()
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export { connection, disconnect };
