@@ -3,7 +3,7 @@ import React from 'react'
 function page() {
   return (
     <main className="flex flex-col items-center justify-center">
-        <h2 className='text-success text-xl p-3'>TAT</h2>
+        <h2 className='text-success text-xl p-3'>TAT a</h2>
     </main>
   )
 }
