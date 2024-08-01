@@ -1,16 +1,30 @@
+import { connection, disconnect } from "@/models/connection"
+import userModel from "@/models/schemas/userSchema"
 import { NextResponse, NextRequest } from "next/server"
-
-export async function GET(request: NextRequest){
-    try {
-        return NextResponse.json({ "status": 200, "message": "Register page GET" })
-    } catch (error) {
-        return NextResponse.json(error)
-    }
-}
 
 export async function POST(request: NextRequest){
     try {
-        return NextResponse.json({ "status": 200, "message": "Register page POST" })
+        const body = await request.json()
+
+
+        const { fullName, gender, age, grade, email, password, rePassword } = body
+        
+        if(password !== rePassword){
+            return NextResponse.json({message: "Passwords do not match"})
+        }
+
+        await connection
+
+        const newUser = new userModel({
+            fullName, gender, age, grade, email, password
+        })
+
+        await newUser.save()
+
+        await disconnect
+
+        return NextResponse.json({message: "User registered successfully"})
+
     } catch (error) {
         return NextResponse.json(error)
     }
