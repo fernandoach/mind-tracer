@@ -6,19 +6,21 @@ export async function POST(request: NextRequest){
     try {
         const body = await request.json()
 
-
         const { fullName, gender, age, grade, email, password, rePassword } = body
-        
+        console.log(body)
+        const nAge = Number(age)
+        const nGrade = Number(grade)
+
         if(password !== rePassword){
             return NextResponse.json({message: "Passwords do not match"})
         }
 
-        console.log(body)
+        
 
         await connection()
 
         const newUser = new userModel({
-            fullName, gender, age, grade, email, password
+            fullName, gender, nAge, nGrade, email, password
         })
 
         await newUser.save()
