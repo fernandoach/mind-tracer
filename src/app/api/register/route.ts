@@ -25,9 +25,12 @@ export async function POST(request: NextRequest){
 
         await disconnect()
 
-        return NextResponse.json({message: "User registered successfully"})
+        return NextResponse.json({message: "User registered successfully", userId: newUser.userId})
 
-    } catch (error) {
+    } catch (error: any) {
+        if (error.code === 11000) { // Código de error para duplicados
+            return NextResponse.json({ message: "Email already exists" }, { status: 409 });
+        }
         return NextResponse.json(error)
     }
 }
