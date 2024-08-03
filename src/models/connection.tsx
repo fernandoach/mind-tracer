@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import userModel from './schemas/userSchema';
 
 const {mongoServer, mongoDbName} = process.env;
 
@@ -8,6 +9,7 @@ console.log(mongoURI)
 const connection = async () => {
     try {
         await mongoose.connect(mongoURI)
+        await userModel.init();
     } catch (error) {
         console.log(error)
     }

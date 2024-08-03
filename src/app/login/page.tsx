@@ -12,7 +12,7 @@ function page() {
                 <Input required type="password" label="Contraseña" placeholder="Ingrese su contraseña" />
                 <div className='flex gap-4 items-center justify-center p-3'>
                 <Button type='submit' color='success'>Iniciar Sesión</Button>
-                <p className='text-sm'>¿No tienes cuenta? <Link href='/api/register'>Registrate</Link></p>
+                <p className='text-sm'>¿No tienes cuenta? <Link href='/register'>Registrate</Link></p>
                 </div>
                 </form>
             </div>
