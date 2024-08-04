@@ -9,6 +9,7 @@ interface IUser extends Document {
     grade: number;
     email: string;
     password: string;
+    role: string;
 }
 
 const userSchema = new Schema({
@@ -18,7 +19,8 @@ const userSchema = new Schema({
     age: {type: Number, required: true},
     grade: {type: Number, required: true},
     email: {type: String, unique: true, required: true},
-    password: {type: String, required: true}
+    password: {type: String, required: true},
+    role: {type: String, default: 'user'},
 }, {
     timestamps: true,
 })

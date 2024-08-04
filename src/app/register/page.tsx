@@ -1,15 +1,15 @@
 'use client';
 
-import AgeInput from '@/components/register/ageInput';
-import EmailInput from '@/components/register/emailInput';
-import FullNameInput from '@/components/register/fullNameInput';
-import GenderInput from '@/components/register/genderInput';
-import GradeInput from '@/components/register/gradeInput';
-import LoginLink from '@/components/register/loginLink';
-import PasswordInput from '@/components/register/passwordInput';
-import RePasswordInput from '@/components/register/rePasswordInput';
-import SubmitButton from '@/components/register/submitButton';
-import userSchema from '@/zod/userZodSchema';
+import AgeInput from '@/components/inputs/ageInput';
+import EmailInput from '@/components/inputs/emailInput';
+import FullNameInput from '@/components/inputs/fullNameInput';
+import GenderInput from '@/components/inputs/genderInput';
+import GradeInput from '@/components/inputs/gradeInput';
+import LoginLink from '@/components/inputs/loginLink';
+import PasswordInput from '@/components/inputs/passwordInput';
+import RePasswordInput from '@/components/inputs/rePasswordInput';
+import SubmitButton from '@/components/inputs/submitButton';
+import userRegisterSchema from '@/zod/userRegisterSchema';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaAddressBook } from 'react-icons/fa6';
@@ -49,7 +49,7 @@ function Page() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await userSchema.parseAsync({
+      await userRegisterSchema.parseAsync({
         ...formData,
         gender: String(formData.gender),
         age: Number(formData.age),

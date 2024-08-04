@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const userSchema = z.object({
+const userRegisterSchema = z.object({
     fullName: z
         .string({ message: 'El nombre completo debe ser una cadena de caracteres.' })
         .min(3, { message: 'El nombre completo debe tener al menos 3 caracteres.' })
@@ -42,4 +42,4 @@ const userSchema = z.object({
     path: ['rePassword'],
 });
 
-export default userSchema;
+export default userRegisterSchema;

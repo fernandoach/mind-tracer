@@ -2,14 +2,13 @@ import { connection, disconnect } from "@/models/connection";
 import userModel from "@/models/schemas/userSchema";
 import { NextResponse, NextRequest } from "next/server";
 import bcrypt from "bcrypt";
-import userSchema from "@/zod/userZodSchema";
+import userRegisterSchema from "@/zod/userRegisterSchema";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
     const { fullName, gender, age, grade, email, password, rePassword } = body;
-    console.log(body);
     const nAge = Number(age);
     const nGrade = Number(grade);
 
@@ -27,7 +26,7 @@ export async function POST(request: NextRequest) {
       rePassword,
     };
     
-    await userSchema.parseAsync(data);
+    await userRegisterSchema.parseAsync(data);
 
     const newPassword = await bcrypt.hash(password, 12);
 
