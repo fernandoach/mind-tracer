@@ -45,8 +45,10 @@ function Page() {
         body: JSON.stringify(formData)
       })
 
+      console.log(registerResponse)
+
       if(registerResponse.ok){
-        router.push('/');
+        router.push('/panel');
       }
       if(!registerResponse.ok){
           setIsSubmitting(false);
@@ -67,6 +69,8 @@ function Page() {
       } else {
         console.error('Error inesperado:', error);
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
