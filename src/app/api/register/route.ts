@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
       password,
       rePassword,
     };
-    
+
     await userRegisterSchema.parseAsync(data);
 
     const newPassword = await bcrypt.hash(password, 12);
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       age: nAge,
       grade: nGrade,
       email,
-      password:newPassword,
+      password: newPassword,
     });
 
     await newUser.save();
@@ -56,10 +56,12 @@ export async function POST(request: NextRequest) {
         { status: 409 }
       );
     }
-    return NextResponse.json({
-      statusCode: 400,
-      message: error.issues[0].message
-    },
-    { status: 400 });
+    return NextResponse.json(
+      {
+        statusCode: 400,
+        message: error.issues[0].message,
+      },
+      { status: 400 }
+    );
   }
 }
