@@ -1,80 +1,78 @@
 'use client'
-import { useState } from 'react'
-import { Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
-import { FaHandHoldingMedical } from 'react-icons/fa6'
+
+import React from "react";
+import GuestNavbar from "./guestNavbar";
+import UserNavbar from "./userNavbar";
+import { useRouter } from "next/navigation";
 
 function NavBar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [fullName, setFullName] = React.useState("")
+  const [role, setRole] = React.useState("")
+  const [email, setEmail] = React.useState("")
+  const [error, setError] = React.useState<string | null>(null);
+  const router = useRouter()
 
-  const menuItems = ['inicio', 'características', 'beneficios', 'preguntas frecuentes', 'como funciona', 'llamado a la acción']
-  return (
-    <Navbar isBordered={true} isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
-      <NavbarContent className='sm:hidden' justify='start'>
-        <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} />
-      </NavbarContent>
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
 
-      <NavbarContent className='sm:hidden pr-3' justify='center'>
-        <NavbarBrand>
-          <Link href='/' color='foreground'>
-          <FaHandHoldingMedical size={25} className='text-success' />
-            <p className='font-bold text-inherit px-2'>Mind Tracer</p>
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
+      if (response.ok) {
+        setEmail("")
+        setFullName("")
+        router.push('/login')
+      }
+    } catch (error) {
+      return router.push('/login')
+    }
+  }
 
-      <NavbarContent className='hidden sm:flex gap-4' justify='center' >
-        <NavbarBrand>
-          <Link href='/' color='foreground'>
-          <FaHandHoldingMedical size={25} className='text-success' />
-            <p className='font-bold text-inherit px-2'>Mind Tracer</p>
-          </Link>
-          
-        </NavbarBrand>
-        <NavbarItem>
-          <Link color='foreground' href='/#caracteristicas'>Características</Link>
-        </NavbarItem>
+  const fetchData = async () => {
+    try {
+      const response = await fetch('/api/auth/profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-        <NavbarItem>
-          <Link color='foreground' href='/#beneficios'>Beneficios</Link>
-        </NavbarItem>
+      if (!response.ok) {
+        throw new Error('Error fetching user data');
+      }
 
-        <NavbarItem>
-          <Link color='foreground' href='/#comofunciona'>¿Como funciona?</Link>
-        </NavbarItem>
+      return await response.json();
+    } catch (err:any) {
+      return <GuestNavbar />
+    }
+  };
 
-        <NavbarItem>
-          <Link color='foreground' href='/#llamadoaccion'>Llamado a la acción</Link>
-        </NavbarItem>
-      </NavbarContent>
+  try {
+    React.useEffect(() => {
+      const loadData = async () => {
+        const response = await fetchData();
+        if (response) {
+          setFullName(response.fullName);
+          setRole(response.role);
+          setEmail(response.email);
+        }
+      };
+  
+      loadData();
+    }, []);
+  } catch (error: any) {
+    return <GuestNavbar />
+  }
 
-      <NavbarContent justify="end">
-        <NavbarItem className="flex">
-          <Link href="/login">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="warning" href="/register" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
+  if( role === "user") {
+    return <UserNavbar fullName={fullName} email={email} handleLogout={handleLogout} />
+  }
 
-      <NavbarMenu className='flex flex-col items-center justify-center gap-8'>
-        <NavbarMenuItem className='flex items-center justify-center'>
-        <Link color='foreground'  href='/#caracteristicas'>Características</Link>
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-        <Link color='foreground' href='/#beneficios'>Beneficios</Link>
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-        <Link color='foreground' href='/#comofunciona'>¿Como funciona?</Link>
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-        <Link color='foreground' href='/#llamadoaccion'>Llamado a la acción</Link>
-        </NavbarMenuItem>
+  return <GuestNavbar />
 
-      </NavbarMenu>
-    </Navbar>
-  )
 }
 
 export default NavBar

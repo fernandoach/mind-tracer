@@ -33,31 +33,31 @@ export async function POST(request: NextRequest) {
 
     //generate token and cookie
     const secretJwtKey = process.env.AUTH_SECRET;
+
     const token = jwt.sign(
       {
         exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30, //token valido por 30 dias
         email,
+        role: user.role,
+        fullName: user.fullName,
       },
       String(secretJwtKey)
     );
 
-    const serialized = serialize("token", token, {
+    const serialized = serialize("Auth-Cookie", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24 * 30, //30 dias
       path: "/",
     });
 
-    cookies().set("Set-Cookie", serialized, {
-      path: "/",
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 1000 * 60 * 60 * 24 * 30, //30 dias
-    });
+    console.log(serialized)
 
-    return NextResponse.json({ message: "Exito al iniciar sesión." });
+    const response = NextResponse.json({ message: "Éxito al iniciar sesión." });
+    response.headers.append("Set-Cookie", serialized);
+
+    return response
   } catch (error: any) {
     return NextResponse.json(
       {
