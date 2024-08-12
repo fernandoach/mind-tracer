@@ -2,6 +2,7 @@
 import EmailInput from "@/components/inputs/emailInput";
 import LoginSubmitButton from "@/components/inputs/loginSubmitButton";
 import PasswordInput from "@/components/inputs/passwordInput";
+import { useAuth } from "@/components/navbar/authContext";
 import userLoginSchema from "@/zod/userLoginSchema";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -19,6 +20,8 @@ function Page() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  const { handleLogin } = useAuth();
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -39,33 +42,23 @@ function Page() {
         password: formData.password,
       });
 
-      const loginResponse = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const userData = await handleLogin(formData.email, formData.password);
 
-      if (loginResponse.ok) {
+
+      if (userData) {
         return router.push("/panel");
       }
 
-      setIsSubmitting(false);
-      const errorData = await loginResponse.json();
-      setErrors({
-        email: errorData.message,
-      });
     } catch (error) {
       if (error instanceof ZodError) {
         const formattedErrors: { [key: string]: string } = {};
         error.errors.forEach((err) => {
-          formattedErrors[err.path[0]] = err.message;
+          formattedErrors["email"] = err.message;
         });
         setErrors(formattedErrors);
         setIsSubmitting(false);
       } else {
-        setErrors({ email: "Error de servidor" });
+        setErrors({ email: "Usuario y/o contraseña incorrectos" });
       }
     } finally {
       setIsSubmitting(false);

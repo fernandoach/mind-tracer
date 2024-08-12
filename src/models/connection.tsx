@@ -1,10 +1,12 @@
 import mongoose from 'mongoose';
 import userModel from './schemas/userSchema';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const {mongoServer, mongoDbName} = process.env;
 
 const mongoURI = `${mongoServer}/${mongoDbName}`;
-console.log(mongoURI)
 
 const connection = async () => {
     try {

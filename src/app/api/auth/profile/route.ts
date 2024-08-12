@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 
 dotenv.config();
 
-export function POST(request: NextRequest) {
+export async function POST(request: NextRequest) {
   const authCookie = cookies().get("Auth-Cookie");
 
   // Verificar si el cookie de autenticación existe
@@ -23,9 +23,9 @@ export function POST(request: NextRequest) {
     if (!email || !role || !fullName) throw new Error("Usted no esta autenticado.");
 
     // validation email exists
-    connection();
+    await connection();
     const user = userModel.findOne({ email });
-    disconnect();
+    await disconnect();
     if (!user) throw new Error("Usted no esta autenticado.");
 
     return NextResponse.json({ email, role, fullName });

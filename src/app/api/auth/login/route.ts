@@ -52,8 +52,6 @@ export async function POST(request: NextRequest) {
       path: "/",
     });
 
-    console.log(serialized)
-
     const response = NextResponse.json({ message: "Éxito al iniciar sesión." });
     response.headers.append("Set-Cookie", serialized);
 
