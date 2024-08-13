@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     // validation email exists
     await connection();
-    const user = userModel.findOne({ email });
+    const user = await userModel.findOne({ email });
     await disconnect();
     if (!user) throw new Error("Usted no esta autenticado.");
 

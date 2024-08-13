@@ -1,6 +1,5 @@
 'use client'
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
-import { useRouter } from 'next/navigation'
 import React from 'react'
 import { FaHandHoldingMedical } from 'react-icons/fa6'
 

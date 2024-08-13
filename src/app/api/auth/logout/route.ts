@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { connection, disconnect } from "@/models/connection";
-import userModel from "@/models/schemas/userSchema";
 import { cookies } from "next/headers";
 
 dotenv.config();

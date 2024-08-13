@@ -5,7 +5,6 @@ import { serialize } from "cookie";
 import userLoginSchema from "@/zod/userLoginSchema";
 import { connection, disconnect } from "@/models/connection";
 import userModel from "@/models/schemas/userSchema";
-import { cookies } from "next/headers";
 import bcrypt from "bcrypt";
 
 dotenv.config();
