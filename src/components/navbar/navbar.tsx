@@ -3,13 +3,13 @@
 import GuestNavbar from "./guestNavbar";
 import UserNavbar from "./userNavbar";
 import { useAuth } from "./authContext";
-import SkeletonNavbar from "./skeletonNavbar";
-
+import dynamic from "next/dynamic";
 function NavBar() {
   const { user, handleLogout, loading } = useAuth();
 
+  const LazySkeletonNavbar = dynamic(() => import("@/components/navbar/skeletonNavbar"));
   if (loading && !user) {
-    return <SkeletonNavbar />;
+    return <LazySkeletonNavbar />;
   }
 
   if (!user) {
