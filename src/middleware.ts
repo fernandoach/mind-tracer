@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
     } catch (error) {
       console.log(error)
       if(request.nextUrl.pathname.startsWith("/panel") ||
-      request.nextUrl.pathname.startsWith("/admin")){
+      request.nextUrl.pathname.startsWith("/admin") || request.nextUrl.pathname.startsWith("/api/panel") || request.nextUrl.pathname.startsWith("/api/admin")){
         return NextResponse.redirect(new URL("/login", request.url));
       }
       return NextResponse.next()
@@ -27,7 +27,7 @@ export async function middleware(request: NextRequest) {
   if (
     !token?.value &&
     (request.nextUrl.pathname.startsWith("/panel") ||
-      request.nextUrl.pathname.startsWith("/admin"))
+      request.nextUrl.pathname.startsWith("/admin") || request.nextUrl.pathname.startsWith("/api/panel") || request.nextUrl.pathname.startsWith("/api/admin"))
   ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }

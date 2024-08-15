@@ -2,7 +2,13 @@ import { NextResponse, NextRequest } from "next/server"
 
 export async function GET(request: NextRequest){
     try {
-        return NextResponse.json({ "status": 200, "message": "TAT page GET" })
+        const response = await fetch('/api/panel/idb', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        return NextResponse.json({ "status": 200, response })
     } catch (error) {
         return NextResponse.json(error)
     }
